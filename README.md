@@ -40,18 +40,6 @@ The front-end consists of several components:
 	- user enters his config file into the web form as a block of text
 	- index.php gets this text from the form and converts it to the Puppet Manifest and Instances
 	
-Block Diagram
-	
-                                                 |------------|     
-                                                 | types.txt  | =>
-                                                 |------------|    	
-|--------------|     |----------------|     |-----------------|     |------------|     |----------------------| 
-| Docs Webpage | =>  | parse_types.py | =>  | PHP Types files | =>  | index.php  | =>  | Manifest + Instances | 
-|--------------|     |----------------|     |-----------------|     |------------|     |----------------------|     
-                                               |--------------|     
-                                               | config text  | =>
-                                               |--------------|      
-	
 Working Demo
 works pretty well for Interface types, but not so well for other types.
 http://www.joe-james.net/cisco/cfg2puppet/index.php
