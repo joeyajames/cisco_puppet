@@ -1,0 +1,25 @@
+<?php
+$cisco_interface_commands = array(
+		'command_string' => '$ciscopuppet::l3_interface_cfg_data::l3_interface_instances.each |$interface, $value| {',
+		'ensure' => array('ensure', array('present', 'absent')), 
+		'interface' => array('interface', array('<string>')), 
+		'description' => array('description', array('<string>', 'default')),
+		'shutdown' => array('shutdown', array('true', 'false', 'default')), 
+		'switchport mode' => array('switchport_mode', array('disabled', 'access', 'tunnel', 'fex_fabric', 'trunk', 'default')), 
+		'access vlan' => array('access_vlan', array('<integer>', 'default')),
+		'encapsulation dot1q' => array('encapsulation_dot1q', array('<integer>', 'default')),
+		'mtu' => array('mtu', array('<integer>')),
+		'switchport autostate exclude' => array('switchport_autostate_exclude', array('true', 'false', 'default')), 
+		'switchport trunk allowed vlan' => array('switchport_trunk_allowed_vlan', array('<string>', 'default')),
+		'switchport trunk native vlan' => array('switchport_trunk_native_vlan', array('<integer>', 'default')), 	
+		'switchport vtp' => array('switchport_vtp', array('true', 'false', 'default')),
+		'negotiate auto' => array('negotiate_auto', array('true', 'false', 'default')),
+		'ip proxy arp' => array('ipv4_proxy_arp', array('true', 'false', 'default')),
+		'ip redirects' => array('ipv4_redirects', array('true', 'false', 'default')),
+		'ip address' => array('ipv4_address', array('<string>', 'default')),
+		'ip netmask length' => array('ipv4_netmask_length', array('<integer>', 'default')),	
+		'vrf' => array('vrf', array('<string>', 'default')),
+		'svi autostate' => array('svi_autostate', array('true', 'false', 'default')),
+		'svi management' => array('svi_management', array('true', 'false', 'default')),
+	);
+?>
