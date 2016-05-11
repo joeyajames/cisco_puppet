@@ -28,22 +28,7 @@ class CiscoType:
         
     def get_attributes(self):
         return self.types
-    '''   
-    def set_ciscoType(self, str):
-        self.ciscoType = str
-    def get_ciscoType(self):
-        return self.ciscoType
-        
-    def set_value(self, str):
-        self.value = str
-    def get_value(self):
-        return self.value
-        
-    def set_puppetHeader(self, str):
-        self.puppetHeader = str
-    def get_puppetHeader(self):
-        return self.puppetHeader
-    '''
+    
         
 class Attribute:
     def __init__(self):

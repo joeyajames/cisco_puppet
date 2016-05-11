@@ -73,7 +73,6 @@ def get_valid_values(s, values):
         match1 = re.search (r'range ([0-9]+)..([0-9]+)', s)
         match2 = re.search (r'between ([0-9]+) and ([0-9]+)', s)
         match3 = re.search (r'from ([0-9]+)..([0-9]+)', s)
-        #match4 = re.search(r'range of ([0-9]+) to ([0-9]+)', s)
         if match:
             first = match.group(1)
             last = match.group(2)
@@ -94,7 +93,7 @@ def get_valid_values(s, values):
             match_values(match3, values)
             
         else:
-            values.append('<integer>')
+            values.append(type(0))  #integer
         
     if 'Speed' in s:
         s = s.split(".")[1]
@@ -107,16 +106,16 @@ def get_valid_values(s, values):
                     values.append(match2.group(1))    
         
     if 'number' in s or 'Number' in s:
-        values.append('<integer>')
+        values.append(type(0))      #integer
     if ' port' in s or ' Port' in s:
-        values.append('<integer>')
+        values.append(type(0))      #integer
         
     if 'string' in s or 'String' in s:
-        values.append('<string>')
+        values.append(type(''))     #string
     if 'interface' in s or 'Interface' in s and 'Speed' not in s:
-        values.append('<string>')
+        values.append(type(''))     #string
     if 'array' in s or 'Array' in s:
-        values.append('<string>')
+        values.append(type(''))     #string
         
     if 'true' in s or 'True' in s:
         values.append('true')
@@ -145,14 +144,14 @@ def get_valid_values(s, values):
             for item in brackets:
                 val = (''.join(c for c in item if c not in string.punctuation))
                 if val.isdigit():
-                    values.append('<integer>')
+                    values.append(type(0))  #integer
                 else:
                     values.append(val)
     values = list(set(values))
     
     return values
     
-def parse_types():
+def Parse_types():
 
     url = urllib2.urlopen('https://github.com/cisco/cisco-network-puppet-module')
     html_doc = url.read()
@@ -187,25 +186,12 @@ def parse_types():
                         if "Valid" in valid_values:
                             valid_values = "Valid" + valid_values.split("Valid")[1]
                     valid_values_list = get_valid_values(valid_values, valid_list)
-                    attr.add_attributes(param, valid_values_list)
+                    attr.add_attributes(get_name(param), valid_values_list)
                     feature.add_attribute(type[6:], attr)
-                    #print "@@@@@@@@@@", param, valid_values_list
                 j += 1
                 if  j >= len(tags):
                     break
                 tag = str(tags[j])
     
-            #feature_list.append(feature.typeName.replace('_',' '))
-            #print feature.typeName, feature.attributes
-            #print "\n"
-    
-                        
     return feature 
-
-
-cmd_types = parse_types()
-
-print "List of Types: \n", cmd_types.types.keys()
-
-print "Complete data structure including Types, attributes & its valid value list:\n", cmd_types.types
 
