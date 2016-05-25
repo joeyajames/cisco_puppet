@@ -187,6 +187,7 @@ def Parse_types():
                             valid_values = "Valid" + valid_values.split("Valid")[1]
                     valid_values_list = get_valid_values(valid_values, valid_list)
                     attr.add_attributes(get_name(param), valid_values_list)
+                    #attr.add_attributes(param, valid_values_list)
                     feature.add_attribute(type[6:], attr)
                 j += 1
                 if  j >= len(tags):

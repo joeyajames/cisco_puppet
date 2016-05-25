@@ -1,30 +1,30 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-0 interface vlan14
-Type: interface Value: vlan14
-[<type 'str'>]
-Provided value is validated now, need to prepare manifest
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-1   mtu 9100
-Attribute:  mtu value:  9100
-[<type 'int'>]
-Provided value of the attribute is validated now, need to prepare manifest
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-2   ip address 124.14.1.1/24
-Attribute:  ip address value:  124.14.1.1/24
-['default', <type 'str'>]
-Provided value of the attribute is validated now, need to prepare manifest
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-3 interface eth1/1
-Type: interface Value: eth1/1
-[<type 'str'>]
-Provided value is validated now, need to prepare manifest
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-4   shutdown
-Attribute:  shutdown value:  true
-['default', 'false', 'true']
-Provided value of the attribute is validated now, need to prepare manifest
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-5   no ip redirects
-Attribute:  ip redirects Value:  false
-['default', 'false', 'true']
-Provided value of the attribute is validated now, need to prepare manifest
+User input
+==========
+interface vlan14
+  mtu 9100
+  ip address 124.14.1.1/24
+interface eth1/1
+  shutdown
+  no ip redirects
+
+
+Puppet Manifest:
+===============
+$ciscopuppet::l3_interface_cfg_data::l3_interface_instances.each |$interface, $value| {
+  cisco_interface { $interface:
+    ip redirects,=> {$value[ip redirects]},
+    shutdown,=> {$value[shutdown]},
+    ip address,=> {$value[ip address]},
+    ip netmask length,=> {$value[ip netmask length]},
+    mtu,=> {$value[mtu]},
+  }
+}
+
+
+
+Instances:
+==========
+$l3_interface_instances = {
+  "eth1/1"=> {ipv4_redirects=>false,shutdown=>true,},
+  "vlan14"=> {ipv4_address=>124.14.1.1,ipv4_netmask_length=>24,mtu=>9100,},
+}
